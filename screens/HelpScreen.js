@@ -1,15 +1,8 @@
 import React from 'react';
 import {
-    Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
     View
 } from 'react-native';
-import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
+import LotsOfGreetings from '../components/Greeting';
 
 export default class HelpScreen extends React.Component{
     static navigationOptions = {
@@ -18,7 +11,7 @@ export default class HelpScreen extends React.Component{
     render(){
         return(
             <View>
-                <Text>HelloWorld!</Text>
+                <LotsOfGreetings />
             </View>
         );
     }
