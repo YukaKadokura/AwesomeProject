@@ -63,7 +63,7 @@ HelpStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'md-help-circle' : 'md-help-circle'}
+      name={Platform.OS === 'ios' ? 'ios-help-circle-outline' : 'md-help-circle'}
     />
   ),
 }
