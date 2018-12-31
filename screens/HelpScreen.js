@@ -3,6 +3,7 @@ import {
     View
 } from 'react-native';
 import LotsOfGreetings from '../components/Greeting';
+import AsyncStorageExample from '../components/AsyncStorageExample';
 
 export default class HelpScreen extends React.Component{
     static navigationOptions = {
@@ -10,9 +11,7 @@ export default class HelpScreen extends React.Component{
     }
     render(){
         return(
-            <View>
-                <LotsOfGreetings />
-            </View>
+            <AsyncStorageExample />
         );
     }
 }
