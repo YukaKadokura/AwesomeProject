@@ -1,13 +1,7 @@
-/**
- * Example AsyncStorage React Native
- * https://github.com/pradeep1991singh
- */
-
 import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  TextInput,
   Button,
   View,
   AsyncStorage
@@ -15,35 +9,23 @@ import {
 
 export default class AsyncStorageExample extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-        myKey: null
-    }
-  }
-
-  async getKey() {
+  async setKey() {
     try {
-      const value = await AsyncStorage.getItem('@MySuperStore:key');
-      this.setState({myKey: value});
+      await AsyncStorage.setItem('testKey', 'testValue');
+      console.log('success to set key and value.');
     } catch (error) {
       console.log("Error retrieving data" + error);
     }
   }
 
-  async saveKey(value) {
+  async getKey() {
     try {
-      await AsyncStorage.setItem('@MySuperStore:key', value);
-    } catch (error) {
-      console.log("Error saving data" + error);
-    }
-  }
-
-  async resetKey() {
-    try {
-      await AsyncStorage.removeItem('@MySuperStore:key');
-      const value = await AsyncStorage.getItem('@MySuperStore:key');
-      this.setState({myKey: value});
+      const value = await AsyncStorage.getItem('testKey');
+      if(value !== null){
+        console.log(`value is ${value}.`);
+      }else{
+        console.log('value is not registered.');
+      }
     } catch (error) {
       console.log("Error resetting data" + error);
     }
@@ -51,68 +33,25 @@ export default class AsyncStorageExample extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Demo AsyncStorage!
+      <View >
+        <Text>
+          Put this button to set key and value!
         </Text>
 
-        <TextInput
-          style={styles.formInput}
-          placeholder="Enter key you want to save!"
-          value={this.state.myKey}
-          onChangeText={(value) => this.saveKey(value)}
-          />
-
         <Button
-          style={styles.formButton}
-          onPress={this.getKey.bind(this)}
-          title="Get Key"
+          onPress={this.setKey}
+          title="set Key"
           color="#2196f3"
-          accessibilityLabel="Get Key"
+          accessibilityLabel="SET"
         />
 
         <Button
-          style={styles.formButton}
-          onPress={this.resetKey.bind(this)}
-          title="Reset"
+          onPress={this.getKey}
+          title="get Key"
           color="#f44336"
-          accessibilityLabel="Reset"
+          accessibilityLabel="GET"
         />
-
-        <Text style={styles.instructions}>
-          Stored key is = {this.state.myKey}
-        </Text>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 30,
-    flex: 1,
-    alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  formInput: {
-    paddingLeft: 5,
-    height: 50,
-    borderWidth: 1,
-    borderColor: "#555555",
-  },
-  formButton: {
-    borderWidth: 1,
-    borderColor: "#555555",
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-    marginTop: 5,
-  },
-});
